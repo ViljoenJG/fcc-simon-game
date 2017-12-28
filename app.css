@@ -104,18 +104,34 @@ body {
   margin-right: 10px;
 }
 
-#green {
+.green {
   background-color: green;
 }
 
-#red {
-  background-color: red;
+.green-on {
+  background-color: limegreen;
 }
 
-#blue {
+.red {
+  background-color: #A93226;
+}
+
+.red-on {
+  background-color: #CB4335;
+}
+
+.blue {
+  background-color: #2980B9;
+}
+
+.blue-on {
   background-color: #0066FF;
 }
 
-#yellow {
-  background-color: #DDDD00;
+.yellow {
+  background-color: #F1C40F;
+}
+
+.yellow-on {
+  background-color: #F7DC6F;
 }
