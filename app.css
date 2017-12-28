@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+body {
+  background-image: url('http://touchechicago.com/wp-content/uploads/2013/10/light-wood-bg-color.jpg');
+  background-size: cover;
+  font-family: 'Bungee';
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.simon {
+  width: 600px;
+  height: 400px;
+  margin: 40px auto;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(35, 35, 35)
+}
+
+.banner {
+  height: 80px;
+  color: white;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 34px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  background-color: rgb(235,235,235);
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.ctrl {
+  border: 2px solid black;
+  border-radius: 3px;
+  float: left;
+  margin: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.start-on {
+  background-color: #E74C3C;
+  color: white;
+}
+
+.strict-on {
+  background-color: #F39C12;
+  color: white;
+}
+
+.power {
+  border: 2px solid black;
+  border-radius: 3px;
+  float: left;
+  background-color: #212F3C;
+  color: white;
+  margin: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.power-on {
+  color: #3498DB;
+}
+
+.count {
+  border: 2px solid black;
+  border-radius: 3px;
+  float: left;
+  margin: 5px;
+  padding: 8px;
+  width: 60px;
+  text-align: center;
+  font-family: 'Bungee', monospace;
+  color: #E74C3C;
+  background-color: maroon;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.btn {
+  height: 100px;
+  width: calc(50% - 5px);
+  margin-top: 10px;
+  border-radius: 2px;
+  float: left;
+}
+
+.left {
+  margin-right: 10px;
+}
+
+#green {
+  background-color: green;
+}
+
+#red {
+  background-color: red;
+}
+
+#blue {
+  background-color: #0066FF;
+}
+
+#yellow {
+  background-color: #DDDD00;
+}
