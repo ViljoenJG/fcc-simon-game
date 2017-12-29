@@ -76,7 +76,7 @@ body {
   color: white;
 }
 
-.count {
+.screen {
   border: 2px solid black;
   border-radius: 3px;
   float: left;
@@ -105,6 +105,10 @@ body {
   cursor: pointer;
 }
 
+.disable-btn {
+  cursor: not-allowed;
+}
+
 .left {
   margin-right: 10px;
 }
@@ -127,4 +131,12 @@ body {
 
 .light-up {
   filter: brightness(150%);
+}
+
+.blink-me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
 }
