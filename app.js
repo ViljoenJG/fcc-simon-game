@@ -37,7 +37,7 @@
 
     if (userSequence.join('') !== compareTo.join('')) {
       playError();
-      if (strictMode) return startGame();
+      if (strictMode) return setTimeout(startGame, 500);
 
       userSequence = [];
       setTimeout(playSequence, 500);
