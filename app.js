@@ -14,7 +14,7 @@
 
   function startGame() {
     if (!isOn) return;
-
+    countDisplay.classList.remove('blink-me');
     userSequence = [];
     rounds = 0;
     sequence = [];
@@ -27,7 +27,6 @@
     countDisplay.innerText = rounds.toString().padStart(2, '0');
     sequence.push(getRandomNumber());
     playSequence();
-    addListeners();
   }
 
   function handleClick(e, val) {
@@ -37,9 +36,9 @@
     const compareTo = sequence.slice(0, userSequence.length);
 
     if (userSequence.join('') !== compareTo.join('')) {
-      playItem(cfg.err);
+      playError();
       if (strictMode) return startGame();
-      
+
       userSequence = [];
       setTimeout(playSequence, 500);
       return;
@@ -49,6 +48,7 @@
     playItem(item);
 
     if (userSequence.length === sequence.length) {
+      if (sequence.length === 20) return gameWon();
       newRound();
     }
   }
@@ -59,6 +59,7 @@
     countDisplay.innerText = '--';
     powerBtn.innerText = 'ON';
     powerBtn.classList.add('power-on');
+    countDisplay.classList.remove('blink-me');
     startBtn.addEventListener('click', startGame, false);
     strictBtn.addEventListener('click', toggleStrict, false);
   }
@@ -74,6 +75,25 @@
     removeListeners();
   }
 
+  function gameWon() {
+    countDisplay.innerText = 'WIN';
+    countDisplay.classList.add('blink-me');
+    let props = Object.getOwnPropertyNames(cfg);
+
+    let inter = setInterval(() => {
+      props.forEach(x => {
+        if (cfg[x].el) {
+          cfg[x].el.classList.add('light-up');
+          setTimeout(removeHiglightCB(cfg[x]), 250);
+        }
+      });
+    }, 500);
+
+    setTimeout(() => {
+      clearInterval(inter);
+    }, 2000)
+  }
+
   function toggleStrict() {
     strictMode = !strictMode;
 
@@ -84,11 +104,42 @@
     }
   }
 
+  function playSequence() {
+    removeListeners();
+    let idx = 1;
+    sequence.forEach(x => {
+      setTimeout(() => {
+        playItem(cfg[x])
+      }, 1000 * idx++);
+    });
+    setTimeout(addListeners, 1000 * idx);
+  }
+
+  function playError() {
+    countDisplay.innerText = '!!';
+    countDisplay.classList.add('blink-me');
+    playItem(cfg.err);
+
+    setTimeout(function() {
+      countDisplay.classList.remove('blink-me');
+      countDisplay.innerText = rounds.toString().padStart(2, '0');
+    }, 1000);
+  }
+
+  function playItem(item) {
+    item.sound.play();
+    if (item.el) {
+      item.el.classList.add('light-up');
+      setTimeout(removeHiglightCB(item), 500);
+    }
+  }
+
   function addListeners() {
     let props = Object.getOwnPropertyNames(cfg);
     props.forEach(x => {
       if (cfg[x].el) {
         cfg[x].el.addEventListener('click', handleClick, false);
+        cfg[x].el.classList.remove('disable-btn');
       }
     })
   }
@@ -98,25 +149,9 @@
     props.forEach(x => {
       if (cfg[x].el) {
         cfg[x].el.removeEventListener('click', handleClick, false);
+        cfg[x].el.classList.add('disable-btn');
       }
     })
-  }
-
-  function playSequence() {
-    let idx = 1;
-    sequence.forEach(x => {
-      setTimeout(() => {
-        playItem(cfg[x])
-      }, 1000 * idx++);
-    })
-  }
-
-  function playItem(item) {
-    item.sound.play();
-    if (item.el) {
-      item.el.classList.add('light-up');
-      setTimeout(removeHiglightCB(item), 500);
-    }
   }
 
   function removeHiglightCB(item) {
